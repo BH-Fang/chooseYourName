@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<head>
+	<title>Document</title>
+    <style>
+        ul.hor {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: green;
+        }
+        ul.hor li{
+            flex: 1;
+        }
+        ul.hor li a{
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 32px;
+            text-decoration:wavy underline;
+        }
+        ul.hor li a:hover{
+            background-color: aquamarine;
+        }
+        ul.hor li a:active{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <ul class="hor">
+        <li><a href="0921.html"> 0921 </a></li>
+        <li><a href="0921_2.html"> 0921-2 </a></li>
+        <li><a href="news/0923.html"> 0923 </a></li>
+        <li><a href="0930.html"> 0930 </a></li>
+    </ul>
+    <ol type="I">
+    <li>Chop potatoes into quarters</li>
+    <li>Simmer in salted water for 15-20 minutes until tender
+      <!-- 方形符號清單 (type="square") -->
+      <ul type="square">
+        <li>1kg King Edward potatoes</li>
+        <li>100ml milk</li>
+        <li>50g salted butter</li>
+        <li>Freshly grated nutmeg</li>
+        <li>Salt and pepper to taste</li>
+      </ul>
+
+      <!-- 定義清單（dl/dt/dd 預設就會自動縮排） -->
+      <dl>
+        <ul type="square" style="margin-bottom: 0;">
+          <li>Sashimi</li>
+        </ul>
+        <dd>Sliced raw fish served with condiments</dd>
+        
+        <dt>Scale</dt>
+        <dd>A Device used to measure theweight of ingredients.</dd>
+        <dd>A technique by which the scales are removed from the skin of fish.</dd>
+      </dl>
+
+    </li>
+    <li>Heat milk, butter and nutmeg</li>
+    <li>Drain potatoes and mash</li>
+    <li>Mix in the milk texture</li>
+    <li><a href="0930_2.html"> back to index</a></li>
+  </ol>
+</body>
+</html>

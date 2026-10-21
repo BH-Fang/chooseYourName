@@ -1,0 +1,129 @@
+<html>
+<head>
+    
+    <style>
+        img.gray{
+            filter: grayscale(70%);
+        }
+        .circle_img {
+            img {
+                border-radius: 50%;
+                width: 450px; height: 450px;
+            }
+            img.blur{
+            filter: blur(3px);
+            }
+        }
+        /* 置中容器與大標題 */
+        .container {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        }
+
+        h1 {
+        font-size: 32px;
+        margin-bottom: 24px;
+        }
+
+        /* 表格樣式 */
+        table {
+        margin: 0 auto;
+        border-collapse: collapse; /* 合併相鄰邊框 */
+        width: 500px;
+        }
+
+        /* 通用儲存格樣式 */
+        th, td {
+        padding: 18px 24px;
+        text-align: center;
+        border: 2px solid #ffffff; /* 白色格線 */
+        font-size: 16px;
+        }
+
+        /* 深灰色背景格（標題列與時間欄） */
+        .dark-cell {
+        background-color: #444444;
+        color: #ffffff;
+        font-weight: bold;
+        }
+
+        /* 淺灰色背景格（課目內容） */
+        .light-cell {
+        background-color: #dcdcdc;
+        color: #111111;
+        }/* 置中容器與大標題 */
+        .container {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        }
+
+        h1 {
+        font-size: 32px;
+        margin-bottom: 24px;
+        }
+
+        /* 表格樣式 */
+        table {
+        margin: 0 auto;
+        border-collapse: collapse; /* 合併相鄰邊框 */
+        width: 500px;
+        }
+
+        /* 通用儲存格樣式 */
+        th, td {
+        padding: 18px 24px;
+        text-align: center;
+        border: 2px solid #ffffff; /* 白色格線 */
+        font-size: 16px;
+        }
+
+        /* 深灰色背景格（標題列與時間欄） */
+        .dark-cell {
+        background-color: #444444;
+        color: #ffffff;
+        font-weight: bold;
+        }
+
+        /* 淺灰色背景格（課目內容） */
+        .light-cell {
+        background-color: #dcdcdc;
+        color: #111111;
+        }
+    </style>
+</head>
+<body>
+    <img src="img/Lenna.png">
+    <img src="img/Lenna.png" class="gray">
+    <br>
+    <div class="circle_img">
+        <img src="img/brad.jpg">
+        <img src="img/brad.jpg" class="blur">
+    </div>
+    <div class="container">
+        <h1>Task</h1>
+        <table>
+            <!-- 第一列：標題 -->
+            <tr>
+            <th class="dark-cell"></th>
+            <th class="dark-cell">Monday</th>
+            <th class="dark-cell">Tuesday</th>
+            <th class="dark-cell">Wednesday</th>
+            </tr>
+            <!-- 第二列：1pm -->
+            <tr>
+            <th class="dark-cell">1pm</th>
+            <td class="light-cell">Math</td>
+            <td class="light-cell">Science</td>
+            <td class="light-cell">Art</td>
+            </tr>
+            <!-- 第三列：2pm -->
+            <tr>
+            <th class="dark-cell">2pm</th>
+            <td class="light-cell">Science</td>
+            <td class="light-cell">Writing</td>
+            <td class="light-cell">Reading</td>
+            </tr>
+        </table>
+        </div>
+</body>
+</html>

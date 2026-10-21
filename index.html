@@ -1,154 +1,639 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOKYO — A Visual Journey Through Japan</title>
+    
+    <!-- 引入高質感雜誌風格英文字體 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
     <style>
-        .header {
-            background-color: #7c2133;
-            color: azure;
-            text-align: center;
-            padding: 30px 20px;
+        /* ================= 全域變數與重設 ================= */
+        :root {
+            --bg-main: #fbf9f5;
+            --bg-card: #ffffff;
+            --text-main: #1f2022;
+            --text-muted: #6e7075;
+            --primary-dark: #202b24;      /* 表頭深墨綠 */
+            --accent-terracotta: #a84838; /* 磚紅/粉橘焦點色 */
+            --border-light: #eae6df;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --container-width: 1080px;
         }
 
-        .imagine {
-            background-color: rgb(32, 21, 21);
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 容器排版 */
+        .page {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* 標題共用樣式 */
+        .section-tag {
+            font-size: 0.75rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--accent-terracotta);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            font-weight: 500;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        /* ================= 頂部導覽列 (Sticky Header) ================= */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(251, 249, 245, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 18px 0;
+            transition: all 0.3s ease;
+        }
+
+        .topbar .page {
             display: flex;
-            justify-content: center;
-            padding: 40px 20px;
-            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .nav {
+            display: flex;
+            list-style: none;
+            gap: 12px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.25s ease;
+        }
+
+        .nav a:hover {
+            color: var(--text-main);
+            background-color: #eee9e0;
+        }
+
+        /* ================= 主視覺 Hero 區塊 ================= */
+        .hero {
+            position: relative;
+            height: 75vh;
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.5)),
+                        url("img/tokyo.jpg") center/cover no-repeat #1b1b1b;
+            color: #ffffff;
+        }
+
+        .hero-content {
+            width: 100%;
+        }
+
+        .hero .subtitle {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .hero .title {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 6vw, 4.8rem);
+            line-height: 1.05;
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+
+        .hero .desc {
+            max-width: 440px;
+            font-size: 1rem;
+            line-height: 1.7;
+            opacity: 0.85;
+            font-weight: 400;
+        }
+
+        /* ================= 區塊一：街區圖文 (Split Content) ================= */
+        .section-neighborhoods {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .split-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 56px;
             align-items: center;
         }
 
-        .imagine img{
-            width: 600px;
-            height: 300px;
+        .col-image {
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 16px 32px rgba(0,0,0,0.06);
         }
 
-        .imagine p{
-            color: white;
+        .col-image img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
         }
 
-        .grid {
+        .col-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .col-text {
+            font-size: 0.95rem;
+            color: #4f5155;
+            line-height: 1.8;
+        }
+
+        .col-text .sub-heading {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--primary-dark);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .col-text p {
+            margin-bottom: 18px;
+        }
+
+        /* ================= 區塊二：照片畫廊 (Gallery Grid) ================= */
+        .section-gallery {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+        }
+
+        .gallery-tip {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            max-width: 260px;
+            line-height: 1.5;
+        }
+
+        .gallery-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
         }
 
-        .card {
-            padding: 40px 30px;
+        /* 畫廊卡片與懸停浮層（解決原本 caption 提示的效果） */
+        .gallery-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+            background: #111;
         }
 
-        .one {
-            background-color:antiquewhite;
-            color: black;
+        .gallery-item img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease, opacity 0.5s ease;
         }
 
-        .one h2{
-            color: #7c2133;
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.1) 70%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            color: #ffffff;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
-        .one b{
-            color: #7c2133;
+        .gallery-overlay h4 {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 6px;
         }
 
-        .two {
-            background-color:darkcyan;
-            color: aliceblue;
+        .gallery-overlay p {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            line-height: 1.5;
         }
 
-        .two h2{
-            color:darkorange;
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            opacity: 0.85;
         }
 
-        .two b{
-            color:darkorange;
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
         }
 
-
-        .three {
-            background-color:rgb(205, 160, 101);
-            color: black;
+        .caption-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 20px;
+            text-align: right;
+            font-style: italic;
         }
 
-        .three h2{
-            color: #7c2133;
+        /* ================= 區塊三：行程與預算表格 (Planner) ================= */
+        .section-planner {
+            padding: 100px 0 120px 0;
         }
 
-        .three b{
-            color: #7c2133;
+        .planner-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 36px;
         }
 
-        .four {
-            background-color:rgb(0, 54, 54);
-            color: azure;
+        .table-card {
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            margin-bottom: 64px;
         }
 
-        .four h2{
-            color:darkorange;
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            text-align: left;
         }
 
-        .four b{
-            color:darkorange;
+        .custom-table th {
+            background-color: var(--primary-dark);
+            color: #ffffff;
+            font-weight: 500;
+            padding: 16px 24px;
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .last {
-            background-color: #7c2133;
-            color: azure;
+        .custom-table td {
+            padding: 18px 24px;
+            border-bottom: 1px solid #f2efea;
+            color: #333;
+        }
+
+        /* 標題欄微灰底色 */
+        .custom-table td.col-highlight {
+            background-color: #ebe7de;
+            font-weight: 600;
+            color: var(--primary-dark);
+            width: 22%;
+        }
+
+        /* 交替橫紋 */
+        .custom-table tr:nth-child(even) td:not(.col-highlight) {
+            background-color: #faf8f5;
+        }
+
+        /* DisneySea 跨欄焦點標記 */
+        .disney-cell {
+            background-color: #f7ede7 !important;
+            color: var(--accent-terracotta);
             text-align: center;
-            padding: 30px 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
-        .last h2 {
-            color: darkorange;
+        .text-right {
+            text-align: right;
+        }
+
+        /* ================= 頁尾 (Footer) ================= */
+        .footer {
+            background-color: var(--primary-dark);
+            color: #ffffff;
+            padding: 60px 0 40px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .footer-brand {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+
+        .footer-bottom {
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ================= RWD 響應式適配 ================= */
+        @media (max-width: 860px) {
+            .split-content {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
+
+            .col-image img {
+                height: 360px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 24px;
+            }
+
+            .table-card {
+                overflow-x: auto;
+            }
+
+            .custom-table {
+                min-width: 540px;
+            }
         }
     </style>
-    <title>Midnight Blues Jazz Night</title>
 </head>
-<body>
-    <div class="header">
-        <h1>MIDNIGHT BLUES</h1>
-        <p>A Night of Jazz, Rhythm & Blues</p>
-        <p>7:30 PM - 11:30 PM · Taipei</p>
-    </div>
-    <div class="imagine">
-        <a href="https://www.youtube.com/"><img src = "ji.jpg"></a>
-        <br>
-        <p>Click the image to visit</p>
-    </div>
-    <div class="grid">
-        <div class="one">
-            <h2>About the Night</h2>
-            <p>aaaaaa<b>bbb</b>aaaa</p>
-            <p>aa<b>bbbbbb</b>aaaa</p>
-            <p>aaaaaa<b>bbbbbbb</b>aa</p>
-            <p>aaaaaaaaaaaaaaa<b>bbbbbb</b>aaaa</p>
+<body id="top">
+
+    <!-- 頂部導覽列 -->
+    <header class="topbar">
+        <div class="page">
+            <a class="brand" href="#top">TOKYO.</a>
+            <ul class="nav">
+                <li><a href="#neighborhoods">Neighborhoods</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#planner">Planner</a></li>
+            </ul>
         </div>
-        <div class="two">
-            <h2>About the Night</h2>
-            <p>aaaaaa<b>bbb</b>aaaa</p>
-            <p>aa<b>bbbbbb</b>aaaa</p>
-            <p>aaaaaa<b>bbbbbbb</b>aa</p>
-            <p>aaaaaaaaaaaaaaa<b>bbbbbb</b>aaaa</p>
+    </header>
+
+    <!-- 主視覺 Hero -->
+    <section class="hero">
+        <div class="page hero-content">
+            <p class="subtitle">A Visual Journey Through Japan</p>
+            <h1 class="title">A City of<br>Contrasts.</h1>
+            <p class="desc">
+                Quiet temples, electric streets, and little moments in between. Discover a different side of Tokyo.
+            </p>
         </div>
-        <div class="three">
-            <h2>About the Night</h2>
-            <p>aaaaaa<b>bbb</b>aaaa</p>
-            <p>aa<b>bbbbbb</b>aaaa</p>
-            <p>aaaaaa<b>bbbbbbb</b>aa</p>
-            <p>aaaaaaaaaaaaaaa<b>bbbbbb</b>aaaa</p>
+    </section>
+
+    <!-- 區塊一：街區圖文 -->
+    <section id="neighborhoods" class="section-neighborhoods">
+        <div class="page">
+            <p class="section-tag">01 / Neighborhoods</p>
+            <h2 class="section-title">Slow down. Look closer.</h2>
+
+            <div class="split-content">
+                <div class="col-image">
+                    <img src="img/tokyo1.jpg" alt="Tokyo quiet street">
+                </div>
+                <div class="col-text">
+                    <h3 class="sub-heading">The Quieter Side</h3>
+                    <p>Beyond the crowded stations and famous landmarks, Tokyo is full of peaceful corners. Small cafés, traditional shops, and narrow streets invite visitors to take their time.</p>
+                    <p>Spend an afternoon walking without a strict plan. Notice the details: wooden doors, warm lanterns, tiny gardens, and the everyday life happening all around you.</p>
+                    <p>Sometimes the most memorable places are the ones you never planned to visit.</p>
+                </div>
+            </div>
         </div>
-        <div class="four">
-            <h2>About the Night</h2>
-            <p>aaaaaa<b>bbb</b>aaaa</p>
-            <p>aa<b>bbbbbb</b>aaaa</p>
-            <p>aaaaaa<b>bbbbbbb</b>aa</p>
-            <p>aaaaaaaaaaaaaaa<b>bbbbbb</b>aaaa</p>
+    </section>
+
+    <!-- 區塊二：照片畫廊 (支援 Hover 故事浮層) -->
+    <section id="gallery" class="section-gallery">
+        <div class="page">
+            <div class="gallery-header">
+                <div>
+                    <p class="section-tag">02 / Photo Journal</p>
+                    <h2 class="section-title">Tokyo in three frames.</h2>
+                </div>
+                <p class="gallery-tip">Move your mouse over each photograph to reveal the story behind the image.</p>
+            </div>
+
+            <div class="gallery-grid">
+                <!-- 第一張卡片 -->
+                <div class="gallery-item">
+                    <img src="img/tokyo2.jpg" alt="Yanaka Alley">
+                    <div class="gallery-overlay">
+                        <h4>Yanaka Alley</h4>
+                        <p>A glimpse into the preserved warmth of old downtown Tokyo.</p>
+                    </div>
+                </div>
+
+                <!-- 第二張卡片 -->
+                <div class="gallery-item">
+                    <img src="img/tokyo2.jpg" alt="Rainy Shinjuku">
+                    <div class="gallery-overlay">
+                        <h4>Neon Reflections</h4>
+                        <p>Rain-slicked alleyways mirroring bright signs in nighttime Shinjuku.</p>
+                    </div>
+                </div>
+
+                <!-- 第三張卡片 -->
+                <div class="gallery-item">
+                    <img src="img/tokyo2.jpg" alt="Morning Coffee">
+                    <div class="gallery-overlay">
+                        <h4>Morning Ritual</h4>
+                        <p>Quiet drip coffee poured in a compact neighborhood roastery.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="caption-note">* Hover over a photograph to view field notes.</p>
         </div>
-    </div>
-    <div class="last">
-        <h2>ccccccccccc</h2>
-        <p>dddddddddddddddddddddddddd</p>
-        <p>ddddddddddddddddddddd</p>
-        <p>ddddddddddddddddddddd</p>
-        <p>dddddddddddddddddddd</p>
-    </div>
+    </section>
+
+    <!-- 區塊三：行程規劃與預算表格[cite: 1] -->
+    <section id="planner" class="section-planner">
+        <div class="page">
+            <!-- 3天行程表[cite: 1] -->
+            <p class="section-tag">03 / Travel Planner</p>
+            <h2 class="section-title">Three Days in Tokyo.</h2>
+            <p class="planner-desc">Plan your mornings, afternoons, and evenings with this simple three-day itinerary[cite: 1].</p>
+
+            <div class="table-card">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 22%;">Day</th>
+                            <th style="width: 32%;">Morning</th>
+                            <th style="width: 24%;">Afternoon</th>
+                            <th style="width: 22%;">Evening</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-highlight">Day 1</td>
+                            <td>Asakusa Temple</td>
+                            <td>Ueno Park</td>
+                            <td>Shibuya</td>
+                        </tr>
+                        <tr>
+                            <td class="col-highlight">Day 2</td>
+                            <td>Meiji Shrine</td>
+                            <td>Harajuku</td>
+                            <td>Shinjuku</td>
+                        </tr>
+                        <tr>
+                            <td class="col-highlight">Day 3</td>
+                            <td colspan="2" class="disney-cell">Tokyo DisneySea</td>
+                            <td>Odaiba</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 預算表[cite: 1] -->
+            <h2 class="section-title">Travel Budget</h2>
+            <p class="planner-desc">A sample budget for transportation and meals in Tokyo[cite: 1].</p>
+
+            <div class="table-card">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 35%;">Category</th>
+                            <th style="width: 40%;">Item</th>
+                            <th class="text-right" style="width: 25%;">Estimated Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="2" class="col-highlight" style="vertical-align: middle;">Transportation</td>
+                            <td>Metro</td>
+                            <td class="text-right">¥1,000</td>
+                        </tr>
+                        <tr>
+                            <td>Train</td>
+                            <td class="text-right">¥1,500</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="col-highlight" style="vertical-align: middle;">Food</td>
+                            <td>Lunch</td>
+                            <td class="text-right">¥1,200</td>
+                        </tr>
+                        <tr>
+                            <td>Dinner</td>
+                            <td class="text-right">¥2,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="footer">
+        <div class="page">
+            <div class="footer-content">
+                <div class="footer-brand">TOKYO.</div>
+                <ul class="footer-links">
+                    <li><a href="#top">Back to Top</a></li>
+                    <li><a href="#neighborhoods">Neighborhoods</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#planner">Planner</a></li>
+                </ul>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Tokyo Journal. All rights reserved.</p>
+                <p>Designed with care for Tokyo travelers.</p>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>

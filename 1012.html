@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>The Quokka</title>
+    <style>
+        body {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #222;
+        }
+
+        /* 每個區塊清除浮動，避免第一張圖影響到下面的區塊 */
+        .section {
+            overflow: auto; /* 或是使用 clear: both; */
+            margin-bottom: 20px;
+        }
+
+        /* 圖片共用樣式：寬度 250px 與圓角 */
+        img {
+            width: 250px;
+            border-radius: 12px; /* Requirement 6: 圓角效果 */
+        }
+
+        /* 第一張圖：靠右浮動，並在左邊與下方加上間距 */
+        .img-right {
+            float: right; /* Requirement 3 & Hint: 靠右對齊 */
+            margin-left: 20px; /* Requirement 5: 與左側文字保持距離 */
+            margin-bottom: 10px;
+        }
+
+        /* 第二張圖：靠左浮動，並在右邊與下方加上間距 */
+        .img-left {
+            float: left; /* Requirement 4 & Hint: 靠左對齊 */
+            margin-right: 20px; /* Requirement 5: 與右側文字保持距離 */
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 第一區塊 -->
+    <div class="section">
+        <!-- Requirement 1: h1 標題 -->
+        <h1>The Quokka</h1>
+        
+        <!-- Requirement 3: 短尾矮袋鼠圖片靠右 (請將 quokka.jpg 替換為你的圖片路徑) -->
+        <img src="img/quokka.jpg" alt="The Quokka" class="img-right">
+        
+        <!-- Requirement 2: 第一段文字 -->
+        <p>
+            The quokka is a small marsupial native to Australia. It is well known for its friendly appearance and often looks like it is smiling. Quokkas usually live on islands and coastal areas, and they are most active at night.
+        </p>
+    </div>
+
+    <!-- 第二區塊 -->
+    <div class="section">
+        <!-- Requirement 1: h2 標題 -->
+        <h2>Where They Live</h2>
+        
+        <!-- Requirement 4: 海灘圖片靠左 (請將 beach.jpg 替換為你的圖片路徑) -->
+        <img src="img/beach.jpg" alt="Rottnest Island Beach" class="img-left">
+        
+        <!-- Requirement 2: 第二段文字 -->
+        <p>
+            Quokkas are mainly found on Rottnest Island and some other nearby islands in Western Australia. They live in bushland, grasslands, and coastal areas where there is plenty of food and shelter.
+        </p>
+    </div>
+
+</body>
+</html>
